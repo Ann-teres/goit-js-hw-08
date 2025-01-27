@@ -64,6 +64,39 @@ const images = [
   },
 ];
 
+const 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function imageTemplate({ preview, original, description }) {
   return `<li class="gallery-item">
