@@ -77,6 +77,35 @@ function imageTempate({ preview, original, description }) {
 </li>`;
 }
 
+function imagesTemplate(arr) {
+  return arr.map(imageTemplate).join("");
+}
+const ulElem = document.querySelector(".gallery");
+ulElem.innerHTML = imagesTemplate(images);
+ulElem.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target === e.currentTarget) return;
+  const instance = basicLightbox.create(`
+    <div class="modal">
+<img
+      class="gallery-image-modal"
+      src="${e.target.dataset.source}"
+      alt="${e.target.alt}" width="1112px" height="640px"
+    />
+    </div>
+`);
+
+  instance.show();
+  document.querySelector(".basicLightbox").style.backgroundColor = "#2E2F42CC";
+
+  const modalElem = document.querySelector(".modal");
+  modalElem.addEventListener("click", () => {
+    instance.close();
+  });
+});
+
+
+
 
 
 
