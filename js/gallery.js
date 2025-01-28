@@ -78,7 +78,7 @@ function imageTempate({ preview, original, description }) {
 }
 
 function imagesTemplate(arr) {
-  return arr.map(imageTemplate).join("");
+  return arr.map(imageTempate).join("");
 }
 const ulElem = document.querySelector(".gallery");
 ulElem.innerHTML = imagesTemplate(images);
