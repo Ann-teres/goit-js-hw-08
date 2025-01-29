@@ -82,9 +82,12 @@ function imagesTemplate(arr) {
 }
 const ulElem = document.querySelector(".gallery");
 ulElem.innerHTML = imagesTemplate(images);
+
 ulElem.addEventListener("click", (e) => {
   e.preventDefault();
-  if (e.target === e.currentTarget) return;
+
+  if (e.target.nodeName !== "IMG") return;
+
   const instance = basicLightbox.create(`
     <div class="modal">
 <img
