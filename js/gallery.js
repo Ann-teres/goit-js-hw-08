@@ -64,7 +64,10 @@ const images = [
   },
 ];
 
-function imageTempate({ preview, original, description }) {
+const galleryImagesToUse = document.querySelectorAll(".gallery");
+const inAction = images
+  
+  .map((preview, original, description) => {
     return `<li class="gallery-item">
   <a class="gallery-link" href="${original}">
     <img
@@ -74,8 +77,53 @@ function imageTempate({ preview, original, description }) {
       alt="${description}"
     />
   </a>
-</li>`;
+</li>`
+  })
+
+   .join('');
+
+galleryImagesToUse.insertAdjacentHTML('beforeend', images);
+   
+
+original.addEventListener("click", function (event) {
+  e.preventDefault();
+  
+  if (click === preview) {
+  return preview
+  } else if(click === original){
+   return  original
 }
+
+
+	console.log(event.target); 
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function imagesTemplate(arr) {
   return arr.map(imageTempate).join("");
