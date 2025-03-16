@@ -64,7 +64,7 @@ const images = [
   },
 ];
 
-const galleryImagesToUse = document.querySelectorAll(".gallery");
+const ImagePalet = document.querySelectorAll(".gallery");
 const inAction = images
   
   .map((preview, original, description) => {
@@ -82,90 +82,35 @@ const inAction = images
 
    .join('');
 
-galleryImagesToUse.insertAdjacentHTML('beforeend', images);
+ImagePalet.insertAdjacentHTML('beforeend', images);
    
 
-original.addEventListener("click", function (event) {
+ImagePalet.addEventListener("click", (e) => {
   e.preventDefault();
+
+ const clickedImage = e.target;
+
   
-  if (click === preview) {
-  return preview
-  } else if(click === original){
-   return  original
-}
-
-
-	console.log(event.target); 
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function imagesTemplate(arr) {
-  return arr.map(imageTempate).join("");
-}
-const ulElem = document.querySelector(".gallery");
-ulElem.innerHTML = imagesTemplate(images);
-
-ulElem.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  if (e.target.nodeName !== "IMG") return;
+  if (e.target.nodeName !== "BUTTON") return;
+  
+  const largeImageURL = clickedImage.dataset.source;
+  console.log("Посилання на велике зображення:", largeImageURL);
 
   const instance = basicLightbox.create(`
-    <div class="modal">
-<img
-      class="gallery-image-modal"
-      src="${e.target.dataset.source}"
-      alt="${e.target.alt}" width="1112px" height="640px"
-    />
-    </div>
-`);
-
-  instance.show();
-  document.querySelector(".basicLightbox").style.backgroundColor = "#2E2F42CC";
-
-  const modalElem = document.querySelector(".modal");
-  modalElem.addEventListener("click", () => {
-    instance.close();
-  });
+    <img src="${largeImageURL}" alt="${clickedImage.alt}" />
+  `);
+    instance.show();
 });
 
+ 
+function selectImage(e) {
 
-
-
-
-
-
-
-
-
-
-
+  console.log(e.target); 
+  if (e.target.nodeName !== "BUTTON")  return;
+  
+const selectedImage = e.target.dataset.images;
+};
+ImagePalet(images)
 
 
 
