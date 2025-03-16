@@ -64,53 +64,60 @@ const images = [
   },
 ];
 
-const ImagePalet = document.querySelectorAll(".gallery");
-const inAction = images
-  
-  .map((preview, original, description) => {
-    return `<li class="gallery-item">
-  <a class="gallery-link" href="${original}">
-    <img
-      class="gallery-image"
-      src="${preview}"
-      data-source="${original}"
-      alt="${description}"
-    />
-  </a>
-</li>`
+const gallery = document.querySelector('.gallery');
+
+
+const galleryMarkup = images
+  .map(({ preview, original, description }) => {
+    return `
+      <li class="gallery-item">
+        <a class="gallery-link" href="${original}">
+          <img class="gallery-image"
+            src="${preview}"
+            data-source="${original}"
+            alt="${description}" />
+        </a>
+      </li>`;
   })
+  .join('');
 
-   .join('');
+gallery.innerHTML = galleryMarkup;
 
-ImagePalet.insertAdjacentHTML('beforeend', images);
-   
 
-ImagePalet.addEventListener("click", (e) => {
-  e.preventDefault();
+gallery.addEventListener("click", (event) => {
+  event.preventDefault();
 
- const clickedImage = e.target;
+  const clickedImage = event.target;
 
-  
-  if (e.target.nodeName !== "BUTTON") return;
-  
+  if (clickedImage.nodeName !== "IMG") return;
+
+
   const largeImageURL = clickedImage.dataset.source;
-  console.log("Посилання на велике зображення:", largeImageURL);
+
 
   const instance = basicLightbox.create(`
     <img src="${largeImageURL}" alt="${clickedImage.alt}" />
   `);
-    instance.show();
+
+  
+  instance.show();
+
+  
+  const closeOnEscape = (event) => {
+    if (event.key === "Escape") {
+      instance.close();
+      document.removeEventListener("keydown", closeOnEscape);
+    }
+  };
+
+  document.addEventListener("keydown", closeOnEscape);
 });
 
- 
-function selectImage(e) {
 
-  console.log(e.target); 
-  if (e.target.nodeName !== "BUTTON")  return;
-  
-const selectedImage = e.target.dataset.images;
-};
-ImagePalet(images)
+
+
+
+
 
 
 
